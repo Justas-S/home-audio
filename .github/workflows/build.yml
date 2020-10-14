@@ -16,10 +16,11 @@ jobs:
           ref: n4.3.1  
     
       - name: install dependencies
-        run: sudo apt-get -y install build-essential autoconf automake cmake libtool
+        run: sudo apt-get -y install build-essential autoconf automake cmake libtool nasm pkg-config libmp3lame-dev
     
       - name: configure
-        run: ./configure
+        run: ./configure --enable-libmp3lame --disable-doc --disable-network --disable-swscale --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape --enable-protocol=file --enable-shared --disable-programs --disable-filters --enable-filter=anull --enable-filter=anullsink --enable-filter=anullsrc --logfile=configure.log 
+
      
   build:
 
