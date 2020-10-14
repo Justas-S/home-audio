@@ -113,13 +113,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      
+      - uses: actions/checkout@v2
         with:
           repository: CopernicaMarketingSoftware/PHP-CPP
           ref: ${{ env.phpcpp-ref }}
           path: php-cpplib
           
-      - uses: actions/checkout@v2
-    
+      - name: debug
+        run: ls -al php-cpplib
+              
       - uses: actions/download-artifact@v2
         with: 
           name: phpcpp-lib
@@ -134,7 +137,7 @@ jobs:
         run: ls -al php-cpplib ffmpeg .
       
       - name: make
-        run: make
+        run: cd libhomeaudio && make
 
 
 
