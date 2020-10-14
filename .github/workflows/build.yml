@@ -80,7 +80,7 @@ jobs:
           key: ${{ runner.os }}-build-phpcpp-${{ env.phpcpp-ref }}
           
       - name: debug
-        run: ls -al . build
+        run: ls -al . build; echo 1
       
       - uses: actions/checkout@v2
         if: steps.cache.outputs.cache-hit != 'true'
