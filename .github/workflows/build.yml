@@ -29,20 +29,20 @@ jobs:
       - name: configure
         run: >
           ./configure --prefix=./build 
-            --enable-shared 
-            --disable-programs 
-            --enable-libmp3lame 
-            --disable-doc 
-            --disable-network 
-            --disable-swscale 
-            --disable-libxcb 
-            --disable-libxcb-shm 
-            --disable-libxcb-xfixes 
-            --disable-libxcb-shape 
-            --enable-protocol=file 
-            --disable-filters --enable-filter=anull --enable-filter=anullsink --enable-filter=anullsrc 
-            --logfile=configure.log 
-      
+          --enable-shared 
+          --disable-programs 
+          --enable-libmp3lame 
+          --disable-doc 
+          --disable-network 
+          --disable-swscale 
+          --disable-libxcb 
+          --disable-libxcb-shm 
+          --disable-libxcb-xfixes 
+          --disable-libxcb-shape 
+          --enable-protocol=file 
+          --disable-filters --enable-filter=anull --enable-filter=anullsink --enable-filter=anullsrc 
+          --logfile=configure.log 
+
       - name: make
         run: make && make install
       
