@@ -88,14 +88,11 @@ jobs:
       - name: install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: sudo apt-get -y install build-essential autoconf automake cmake libtool
-      - name: debug1
-        run: ls -al . /usr/include && php --version
+    
       - name: make
         if: steps.cache.outputs.cache-hit != 'true'
         run: make
-        
-      - name: debug
-        run: ls -al
+  
       - uses: actions/upload-artifact@v2
         with:
           name: phpcpp-lib
@@ -103,10 +100,34 @@ jobs:
       
      
   build:
-
+    needs: [build-ffmpeg, build-php-cpp]
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: make
-      run: make
+      - uses: actions/checkout@v2
+        with:
+          repository: CopernicaMarketingSoftware/PHP-CPP
+          ref: ${{ env.phpcpp-ref }}
+          path: php-cpplib
+          
+      - uses: actions/checkout@v2
+    
+      - uses: actions/download-artifact@v2
+        with: 
+          name: php-cpplib
+          path: php-cpplib
+      
+      - uses: actions/download-artifact@v2
+        with: 
+          name: ffmpeg-lib-binaries
+          path: ffmpeg
+      
+      - name: debug
+        run: ls -al php-cpplib ffmpeg .
+      
+      - name: make
+        run: make
+
+
+
+
+
