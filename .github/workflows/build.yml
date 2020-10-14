@@ -1,4 +1,6 @@
 name: C/C++ CI
+env:
+  ffmpeg-ref: n4.3.1
 
 on:
   push:
@@ -10,17 +12,47 @@ jobs:
   build-ffmpeg:
     runs-on: ubuntu-latest
     steps:
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ./build
+          key: ${{ runner.os }}-build-ffmpeg-${{ env.ffmpeg-ref }}
+          restore-keys: |
+            ${{ runner.os }}-build-ffmpeg-${{ env.ffmpeg-ref }}
+          
       - uses: actions/checkout@v2
         with:
           repository: FFmpeg/FFmpeg
-          ref: n4.3.1  
+          ref: ${{ env.ffmpeg-ref }}  
     
       - name: install dependencies
         run: sudo apt-get -y install build-essential autoconf automake cmake libtool nasm pkg-config libmp3lame-dev
     
       - name: configure
-        run: ./configure --enable-libmp3lame --disable-doc --disable-network --disable-swscale --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape --enable-protocol=file --enable-shared --disable-programs --disable-filters --enable-filter=anull --enable-filter=anullsink --enable-filter=anullsrc --logfile=configure.log 
-
+        run: >
+          ./configure --with-prefix=./build 
+            --enable-shared 
+            --disable-programs 
+            --enable-libmp3lame 
+            --disable-doc 
+            --disable-network 
+            --disable-swscale 
+            --disable-libxcb 
+            --disable-libxcb-shm 
+            --disable-libxcb-xfixes 
+            --disable-libxcb-shape 
+            --enable-protocol=file 
+            --disable-filters --enable-filter=anull --enable-filter=anullsink --enable-filter=anullsrc 
+            --logfile=configure.log 
+      
+      - name: make
+        run: make && make install
+      
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ffmpeg-lib-binaries
+          path: ./build/lib
+    
      
   build:
 
