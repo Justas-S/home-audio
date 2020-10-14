@@ -1,6 +1,7 @@
 name: C/C++ CI
 env:
   ffmpeg-ref: n4.3.1
+  env.phpcpp-ref: v2.1.4 
 
 on:
   push:
@@ -67,7 +68,35 @@ jobs:
           path: |
             ./build/lib/*.so
             ./build/lib/pkgconfig
-    
+            
+  build-php-cpp:  
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache phpcpp build output
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ./libphpcpp.so*
+          key: ${{ runner.os }}-build-phpcpp-${{ env.phpcpp-ref }}
+      
+      - uses: actions/checkout@v2
+        with:
+          repository: CopernicaMarketingSoftware/PHP-CPP
+          refs: ${{ env.phpcpp-ref }}
+          
+      - name: install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: sudo apt-get -y install build-essential autoconf automake cmake libtool
+      
+      - name: make
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: make
+        
+      - uses: actions/upload-artifact@v2
+        with:
+          name: phpcpp-lib
+          path: ./*.so
+      
      
   build:
 
