@@ -82,7 +82,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: CopernicaMarketingSoftware/PHP-CPP
-          refs: ${{ env.phpcpp-ref }}
+          ref: ${{ env.phpcpp-ref }}
           
       - name: install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
@@ -95,7 +95,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: phpcpp-lib
-          path: ./*.so
+          path: ./*.so.*
       
      
   build:
