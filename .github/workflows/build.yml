@@ -31,15 +31,15 @@ jobs:
        
     steps:
       - name: Computed cache key
-        run: echo -n "${{ env.ffmpeg-build-params }}" | md5sum | awk '{print $1}' > cache-key
+        id: cache-key
+        run: echo "::set-output name=cache-key::$(echo -n "${{ env.ffmpeg-build-params }}" | md5sum | awk '{print $1}')"
+        
       - name: Cache ffmpeg build output
         id: cache
         uses: actions/cache@v2
         with:
           path: ./build
-          key: ${{ runner.os }}-build-ffmpeg-${{ env.ffmpeg-ref }}-${{ hashFiles('cache-key') }}
-          restore-keys: |
-            ${{ runner.os }}-build-ffmpeg-${{ env.ffmpeg-ref }}-${{ hashFiles('cache-key') }}
+          key: ${{ runner.os }}-build-ffmpeg-${{ env.ffmpeg-ref }}-${{ steps.cache-key.outputs.cache-key }}
           
       - uses: actions/checkout@v2
         if: steps.cache.outputs.cache-hit != 'true'
