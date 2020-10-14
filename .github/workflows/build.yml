@@ -4,9 +4,7 @@ env:
 
 on:
   push:
-    branches: [ master,gh-actions ]
-  pull_request:
-    branches: [ master, gh-actions ]
+    branches: [ gh-actions ]
 
 jobs:
   build-ffmpeg:
@@ -30,7 +28,7 @@ jobs:
     
       - name: configure
         run: >
-          ./configure --with-prefix=./build 
+          ./configure --prefix=./build 
             --enable-shared 
             --disable-programs 
             --enable-libmp3lame 
