@@ -97,6 +97,7 @@ jobs:
         run: make
       
       - name: stage lib
+        if: steps.cache.outputs.cache-hit != 'true'
         run: mkdir -p build && mv *.so.* build/
       
       - name: debug
