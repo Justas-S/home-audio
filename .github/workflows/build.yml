@@ -1,7 +1,7 @@
 name: C/C++ CI
 env:
   ffmpeg-ref: n4.3.1
-  env.phpcpp-ref: v2.1.4 
+  phpcpp-ref: v2.1.4 
 
 on:
   push:
@@ -76,10 +76,11 @@ jobs:
         id: cache
         uses: actions/cache@v2
         with:
-          path: ./libphpcpp.so*
+          path: .
           key: ${{ runner.os }}-build-phpcpp-${{ env.phpcpp-ref }}
       
       - uses: actions/checkout@v2
+        if: steps.cache.outputs.cache-hit != 'true'
         with:
           repository: CopernicaMarketingSoftware/PHP-CPP
           ref: ${{ env.phpcpp-ref }}
