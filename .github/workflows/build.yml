@@ -1,7 +1,7 @@
 name: C/C++ CI
 env:
   ffmpeg-ref: n4.3.1
-  phpcpp-ref: v2.1.4 
+  phpcpp-ref: da21e3a0bc5afdfeea1cbfe44b16472fc69e135b
 
 on:
   push:
