@@ -97,7 +97,7 @@ jobs:
         run: make
       
       - name: stage lib
-        run: mv *.so.* build/
+        run: mkdir -p build && mv *.so.* build/
       
       - name: debug
         run: ls -al . build
