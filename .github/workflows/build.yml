@@ -88,7 +88,8 @@ jobs:
       - name: install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: sudo apt-get -y install build-essential autoconf automake cmake libtool
-      
+      - name: debug1
+        run: ls -al . /usr/include && php --version
       - name: make
         if: steps.cache.outputs.cache-hit != 'true'
         run: make
