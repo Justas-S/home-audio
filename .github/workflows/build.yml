@@ -77,7 +77,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: .
-          key: ${{ runner.os }}-build-phpcpp-${{ env.phpcpp-ref }}
+          key: ${{ runner.os }}-build-phpcpp-${{ env.phpcpp-ref }}-debug
           
       - name: debug
         run: ls -al
@@ -95,6 +95,9 @@ jobs:
       - name: make
         if: steps.cache.outputs.cache-hit != 'true'
         run: make
+      
+      - name: debug
+        run: ls -al
   
       - uses: actions/upload-artifact@v2
         with:
