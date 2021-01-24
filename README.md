@@ -1,24 +1,21 @@
-# Lumen PHP Framework
+# Home audio(WIP, not-functional)
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+## Goals
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+-   Search tracks independent of their location
+-   Download tracks using a single interface from multiple providers(YouTube/Spotify/other?)
+-   Control audio playback with low delay
+-   Enable metadata using musicbrainz.org(optional)
 
-## Official Documentation
+## Status
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+Implemented:
 
-## Contributing
+-   Searching and downloading tracks from YouTube
+-   Basic audio playback, track queuing
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Overview
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-   [libhomeaudio](libhomeaudio/) - thin C++ wrapper for libpulse and ffmpeg using PHP-CPP
+-   [client](client/) - React/TailwindCSS client
+-   [app/routes](app/) - Lumen back-end with SQLite and laravel-websockets as a Pusher compatible broadcast mechanism
