@@ -1,0 +1,70 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "awesome-debounce-promise": "^2.1.0",
+    "axios": "^0.20.0",
+    "heroicons": "^0.4.2",
+    "laravel-echo": "^1.8.1",
+    "lodash": "^4.17.20",
+    "pusher-js": "^7.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-query": "^2.23.1",
+    "react-query-devtools": "^2.6.0",
+    "react-scripts": "3.4.3",
+    "tailwindcss": "^1.8.0",
+    "typescript": "^4.0.2"
+  },
+  "scripts": {
+    "start": "npm run watch:css &&  react-scripts start",
+    "build": "npm run build:css react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build:css": "postcss src/index.css -o src/assets/index.css",
+    "watch:css": "postcss src/index.css -o src/assets/index.css"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "react",
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "no-unused-expressions": "warn",
+      "@typescript-eslint/no-unused-expressions": "warn"
+    }
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/axios": "^0.14.0",
+    "@types/jest": "^26.0.13",
+    "@types/node": "^14.6.4",
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
+    "autoprefixer": "^9.8.6",
+    "eslint-config-typescript": "^3.0.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.6",
+    "postcss-cli": "^7.1.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
